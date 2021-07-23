@@ -1,11 +1,9 @@
-import React from 'react';
+import React from "react";
 
-const List = () => {
+export const List = () => {
   return (
-    <>
+    <React.Fragment>
       <h2>list component</h2>
-    </>
+    </React.Fragment>
   );
 };
-
-export default List;
