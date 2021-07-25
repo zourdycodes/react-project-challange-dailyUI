@@ -10,31 +10,35 @@ export const App = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const fetchTours = async () => {
-      const dataset = await fetch(url)
-        .then((response) => {
-          if (
-            !response.ok &&
-            response.status >= 400 &&
-            response.status <= 600
-          ) {
-            return setError(true);
-          }
+    try {
+      const fetchTours = async () => {
+        const dataset = await fetch(url)
+          .then((response) => {
+            if (
+              !response.ok &&
+              response.status >= 400 &&
+              response.status <= 600
+            ) {
+              return setError(true);
+            }
 
-          return response.json();
-        })
-        .then((data) => {
-          setTours(data);
-          setIsLoading((loading) => !loading);
-        })
-        .catch((err) => {
-          console.error(err.message);
-        });
+            return response.json();
+          })
+          .then((data) => {
+            setTours(data);
+            setIsLoading((loading) => !loading);
+          })
+          .catch((err) => {
+            console.error(err.message);
+          });
 
-      return dataset;
-    };
+        return dataset;
+      };
 
-    fetchTours();
+      fetchTours();
+    } catch (error) {
+      console.error(error.message);
+    }
   }, []);
 
   const removeTours = (id) => {
