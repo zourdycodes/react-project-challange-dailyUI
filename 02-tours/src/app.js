@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Loading from "./components/Loading";
 import Tours from "./components/Tours";
 
-const url = "https://course-api.com/react-tours-project";
+const url = "https://course-api.com/react-tours-projec";
 
 export const App = () => {
   const [tours, setTours] = useState();
@@ -13,15 +13,18 @@ export const App = () => {
     const fetchTours = async () => {
       const dataset = await fetch(url)
         .then((response) => {
-          if (!response.ok && response.status >= 400) {
-            return setError((error) => !error);
+          if (
+            !response.ok &&
+            response.status >= 400 &&
+            response.status <= 600
+          ) {
+            return setError(true);
           }
 
           return response.json();
         })
         .then((data) => {
           setTours(data);
-          setError(false);
           setIsLoading((loading) => !loading);
         })
         .catch((err) => {
@@ -39,24 +42,13 @@ export const App = () => {
     setTours(newTour);
   };
 
-  if (error) {
-    return (
-      <React.Fragment>
-        <h4>
-          Error, No Data retrieved! the request call is maybe forbidden or your
-          API endpoint is wrong
-        </h4>
-      </React.Fragment>
-    );
-  }
-
   return (
     <React.Fragment>
       <main>
         {isLoading ? (
           <Loading />
         ) : (
-          <Tours tours={tours} removeTours={removeTours} />
+          <Tours tours={tours} error={error} removeTours={removeTours} />
         )}
       </main>
     </React.Fragment>
