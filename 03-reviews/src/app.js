@@ -1,8 +1,18 @@
 import React from "react";
-import Review from "./Review";
+import { Review } from "./Review";
 
 export const App = () => {
-  return <h2>reviews project setup</h2>;
+  return (
+    <main>
+      <section className="container">
+        <div className="title">
+          <h2>Client Reviews</h2>
+          <div className="underline"></div>
+        </div>
+        <Review />
+      </section>
+    </main>
+  );
 };
 
 export default App;
