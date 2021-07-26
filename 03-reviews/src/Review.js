@@ -40,6 +40,11 @@ export const Review = () => {
 
   const randomPerson = () => {
     let randomNum = Math.round(Math.random() * people.length);
+
+    /***********************
+     * FIXING THE REPETITION NUMBER
+     **********************/
+
     if (randomNum === index) {
       randomNum = ++index;
     }
