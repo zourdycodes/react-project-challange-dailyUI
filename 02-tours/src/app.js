@@ -46,14 +46,24 @@ export const App = () => {
     setTours(newTour);
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (tours.length === 0) {
+    return (
+      <main>
+        <div className="title">
+          <h2>No Tours are available !</h2>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <React.Fragment>
       <main>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <Tours tours={tours} error={error} removeTours={removeTours} />
-        )}
+        <Tours tours={tours} error={error} removeTours={removeTours} />
       </main>
     </React.Fragment>
   );
