@@ -6,6 +6,47 @@ export const Review = () => {
   const [index, setIndex] = useState(0);
   const { id, image, job, name, text } = people[index];
 
+  const checkNumber = (number) => {
+    /***********************
+     * BACK TO THE FIRST PERSON
+     **********************/
+    if (number > people.length - 1) return 0;
+
+    /***********************
+     * BACK TO THE LAST PERSON => if the number is negative
+     **********************/
+    if (number < 0) {
+      return people.length - 1; // 3
+    }
+
+    return number;
+  };
+
+  const nextPerson = () => {
+    setIndex((index) => {
+      let newIndex = ++index;
+      return checkNumber(newIndex);
+    });
+  };
+
+  const prevPerson = () => {
+    setIndex((index) => {
+      let newIndex = --index;
+      return checkNumber(newIndex);
+    });
+  };
+
+  console.log(index);
+
+  const randomPerson = () => {
+    let randomNum = Math.round(Math.random() * people.length);
+    if (randomNum === index) {
+      randomNum = ++index;
+    }
+
+    setIndex(checkNumber(randomNum));
+  };
+
   return (
     <article className="review">
       <div className="img-container">
@@ -19,15 +60,17 @@ export const Review = () => {
       <p className="info">{text}</p>
 
       <div className="button-container">
-        <button className="prev-btn">
+        <button className="prev-btn" onClick={prevPerson}>
           <FaChevronLeft />
         </button>
-        <button className="prev-btn">
+        <button className="prev-btn" onClick={nextPerson}>
           <FaChevronRight />
         </button>
       </div>
 
-      <button className="random-btn">suprise me</button>
+      <button className="random-btn" onClick={randomPerson}>
+        surprise me
+      </button>
     </article>
   );
 };

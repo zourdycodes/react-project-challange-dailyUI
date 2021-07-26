@@ -6,7 +6,7 @@ export const App = () => {
     <main>
       <section className="container">
         <div className="title">
-          <h2>Client Reviews</h2>
+          <h3>Client Reviews</h3>
           <div className="underline"></div>
         </div>
         <Review />
