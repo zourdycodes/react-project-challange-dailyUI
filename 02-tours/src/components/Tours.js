@@ -24,7 +24,7 @@ const Tours = ({ tours, removeTours, error }) => {
         {tours?.map((tour) => {
           const { id } = tour;
 
-          return <Tour key={id} id={id} {...tour} removeTours={removeTours} />;
+          return <Tour key={id} {...tour} removeTours={removeTours} />;
         })}
       </div>
     </section>

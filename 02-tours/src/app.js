@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Loading from "./components/Loading";
 import Tours from "./components/Tours";
 
-const url = "https://course-api.com/react-tours-projec";
+const url = "https://course-api.com/react-tours-project";
 
 export const App = () => {
   const [tours, setTours] = useState();
