@@ -4,7 +4,7 @@ import people from "./data";
 
 export const Review = () => {
   const [index, setIndex] = useState(0);
-  const { id, image, job, name, text } = people[index];
+  const { image, job, name, text } = people[index];
 
   const checkNumber = (number) => {
     /***********************
@@ -46,7 +46,7 @@ export const Review = () => {
      **********************/
 
     if (randomNum === index) {
-      randomNum = ++index;
+      randomNum = index + 1;
     }
 
     setIndex(checkNumber(randomNum));
