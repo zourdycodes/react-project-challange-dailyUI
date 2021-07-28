@@ -8,7 +8,11 @@ export const Question = ({ title, info }) => {
     <article className="question">
       <header>
         <h4>{title}</h4>
-        <button className="btn" type="button">
+        <button
+          className="btn"
+          type="button"
+          onClick={() => setToggle((toggle) => !toggle)}
+        >
           {toggle ? <AiOutlineMinus /> : <AiOutlinePlus />}
         </button>
       </header>
