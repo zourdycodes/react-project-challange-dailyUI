@@ -64,7 +64,7 @@ export const App = () => {
             return (
               <button
                 key={index}
-                className="job-btn"
+                className={`job-btn ${index === value && "active-btn"}`}
                 onClick={() => setValue(index)}
               >
                 {jobData.company}
