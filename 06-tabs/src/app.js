@@ -32,17 +32,27 @@ export const App = () => {
     }
   }, []);
 
+  if (error) {
+    return (
+      <section className="section loading">
+        <h4>Error!, check the API Endpoint!</h4>
+      </section>
+    );
+  }
+
   return (
     <main>
       {loading ? (
-        <h1>Loading ....</h1>
+        <section className="section loading">
+          <h3>Loading ....</h3>
+        </section>
       ) : (
         jobs?.map((jobData) => {
           const { id, company } = jobData;
 
           return (
             <main key={id}>
-              <p>{company}</p>
+              <button className="btn">{company}</button>
             </main>
           );
         })
