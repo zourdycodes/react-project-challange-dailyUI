@@ -18,7 +18,7 @@ const menu = [
   {
     id: 3,
     title: "godzilla milkshake",
-    category: "shakes",
+    category: "dessert",
     price: 6.99,
     img: "./images/item-3.jpeg",
     desc: `ombucha chillwave fanny pack 3 wolf moon street art photo booth before they sold out organic viral.`,
@@ -42,7 +42,7 @@ const menu = [
   {
     id: 6,
     title: "oreo dream",
-    category: "shakes",
+    category: "dessert",
     price: 18.99,
     img: "./images/item-6.jpeg",
     desc: `Portland chicharrones ethical edison bulb, palo santo craft beer chia heirloom iPhone everyday`,
@@ -66,7 +66,7 @@ const menu = [
   {
     id: 9,
     title: "quarantine buddy",
-    category: "shakes",
+    category: "dessert",
     price: 16.99,
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
