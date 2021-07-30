@@ -4,7 +4,7 @@ import { FaAngleDoubleRight } from "react-icons/fa";
 const url = "https://course-api.com/react-tabs-project";
 
 export const App = () => {
-  const [jobs, setJobs] = useState();
+  const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [value, setValue] = useState(0);
@@ -40,24 +40,39 @@ export const App = () => {
     );
   }
 
-  return (
-    <main>
-      {loading ? (
-        <section className="section loading">
-          <h3>Loading ....</h3>
-        </section>
-      ) : (
-        jobs?.map((jobData) => {
-          const { id, company } = jobData;
+  if (loading) {
+    return (
+      <section className="section loading">
+        <h3>Loading ....</h3>
+      </section>
+    );
+  }
 
-          return (
-            <main key={id}>
-              <button className="btn">{company}</button>
-            </main>
-          );
-        })
-      )}
-    </main>
+  const { company, id, duties, title, dates } = jobs[value];
+
+  return (
+    <section className="section">
+      <div className="title">
+        <h2>Experience</h2>
+        <div className="underline"></div>
+      </div>
+
+      <div className="jobs-center">
+        {/* Btn container */}
+        {/* Job info */}
+        <article className="job-info">
+          <h3>{title}</h3>
+          <h4>{company}</h4>
+          <p className="job-date">{dates}</p>
+          {duties?.map((duty, index) => (
+            <div key={index} className="job-desc">
+              <FaAngleDoubleRight className="job-icon" />
+              <p>{duty}</p>
+            </div>
+          ))}
+        </article>
+      </div>
+    </section>
   );
 };
 
