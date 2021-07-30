@@ -48,7 +48,7 @@ export const App = () => {
     );
   }
 
-  const { company, id, duties, title, dates } = jobs[value];
+  const { company, duties, title, dates } = jobs[value];
 
   return (
     <section className="section">
@@ -59,6 +59,19 @@ export const App = () => {
 
       <div className="jobs-center">
         {/* Btn container */}
+        <div className="btn-container">
+          {jobs?.map((jobData, index) => {
+            return (
+              <button
+                key={index}
+                className="job-btn"
+                onClick={() => setValue(index)}
+              >
+                {jobData.company}
+              </button>
+            );
+          })}
+        </div>
         {/* Job info */}
         <article className="job-info">
           <h3>{title}</h3>
