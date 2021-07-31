@@ -8,6 +8,9 @@ export const App = () => {
   const [people, setPeople] = useState(data);
   const [index, setIndex] = useState(0);
 
+  /*==========================
+    SETTING UP COLLISION GUARD
+  ===========================*/
   useEffect(() => {
     const lastIndex = people.length - 1;
 
@@ -19,6 +22,16 @@ export const App = () => {
       setIndex(0);
     }
   }, [index, people]);
+
+  useEffect(() => {
+    let slideAnimation = setInterval(() => {
+      setIndex((index) => ++index);
+    }, 4000);
+
+    return () => {
+      clearInterval(slideAnimation);
+    };
+  }, [index]);
 
   return (
     <section className="section">
