@@ -18,14 +18,13 @@ export const App = () => {
         if (!response.ok && response.status > 400) {
           return setError((error) => !error);
         }
-
-        const data = await response.json();
-
-        console.log(data);
         setJobs(data);
         setLoading((loading) => !loading);
       };
 
+      const data = await response.json();
+
+      console.log(data);
       fetchJobs();
     } catch (error) {
       throw new Error(error.message);
