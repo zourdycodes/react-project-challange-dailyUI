@@ -7,7 +7,17 @@ export const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setText(data);
+    let amount = parseInt(count);
+
+    if (count <= 0) {
+      amount = 1;
+    }
+
+    if (count > text.length - 1) {
+      amount = text.length - 1;
+    }
+
+    setText(data.slice(0, amount));
   };
 
   return (
