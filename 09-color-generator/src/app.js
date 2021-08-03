@@ -10,7 +10,13 @@ export const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hello");
+
+    try {
+      let colors = new Values(color).all(10);
+      console.log(colors);
+    } catch (error) {
+      setError((error) => !error);
+    }
   };
 
   return (
@@ -20,6 +26,7 @@ export const App = () => {
         <form onSubmit={handleSubmit}>
           <input
             type="text"
+            className={`${error ? "error" : null}`}
             placeholder="#f15025"
             value={color}
             onChange={({ target }) => setColor(target.value)}
