@@ -10,7 +10,6 @@ export const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     try {
       let colors = new Values(color).all(10);
       setList(colors);
@@ -39,7 +38,9 @@ export const App = () => {
         </form>
       </section>
       <section className="colors">
-        <h4>list goes here</h4>
+        {list?.map((color, index) => (
+          <SingleColor key={index} {...color} index={index} />
+        ))}
       </section>
     </>
   );
