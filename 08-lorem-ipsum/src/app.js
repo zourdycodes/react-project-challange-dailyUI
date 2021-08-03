@@ -5,15 +5,19 @@ export const App = () => {
   const [count, setCount] = useState(0);
   const [text, setText] = useState([]);
 
+  console.log(data.length);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // string => number
     let amount = parseInt(count);
 
     if (count <= 0) {
       amount = 1;
     }
 
-    if (count > text.length - 1) {
+    if (count >= text.length - 1) {
       amount = text.length - 1;
     }
 
