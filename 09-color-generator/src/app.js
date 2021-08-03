@@ -13,9 +13,11 @@ export const App = () => {
 
     try {
       let colors = new Values(color).all(10);
-      console.log(colors);
+      setList(colors);
+      setError(false);
     } catch (error) {
       setError((error) => !error);
+      console.error(error);
     }
   };
 
