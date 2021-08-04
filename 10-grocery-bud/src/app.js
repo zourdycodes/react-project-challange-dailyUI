@@ -22,7 +22,7 @@ export const App = () => {
     } else if (name && isEditing) {
       // deal with edit
     } else {
-      // show alert
+      showAlert(true, "added to the list", "success");
       const newItem = {
         id: new Date().getTime().toString(),
         title: name,
@@ -31,6 +31,9 @@ export const App = () => {
       setList((list) => {
         return [...list, newItem];
       });
+
+      localStorage.setItem("lists", JSON.stringify(newItem));
+
       setName("");
     }
   };
@@ -39,10 +42,25 @@ export const App = () => {
     setAlert({ show, type, msg });
   };
 
+  const clearItem = () => {
+    showAlert(true, "empty list", "danger");
+    setList([]);
+  };
+
+  // get Item from the localStorage
+
+  // remove item
+
+  const removeItem = (id) => {
+    const newList = list.filter((item) => item.id !== id);
+
+    setList(newList);
+  };
+
   return (
     <section className="section-center">
       <form className="grocery-form" onSubmit={handleSubmit}>
-        {alert.show && <Alert {...alert} />}
+        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
         <h3>grocery buddy</h3>
         <div className="form-control">
           <input
@@ -60,8 +78,10 @@ export const App = () => {
 
       {list.length > 0 && (
         <div className="grocery-container">
-          <List items={list} />
-          <button className="clear-btn">clear items</button>
+          <List items={list} removeItem={removeItem} />
+          <button className="clear-btn" onClick={clearItem}>
+            clear items
+          </button>
         </div>
       )}
     </section>
