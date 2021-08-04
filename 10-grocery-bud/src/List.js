@@ -9,7 +9,7 @@ const List = ({ items, removeItem, editItem }) => {
         return (
           <article key={id} className="grocery-item">
             <p className="title">{title}</p>
-            <div className="btn-containe">
+            <div className="btn-container">
               <button
                 type="submit"
                 className="edit-btn"

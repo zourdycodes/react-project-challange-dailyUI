@@ -2,9 +2,19 @@ import React, { useState, useEffect } from "react";
 import List from "./List";
 import Alert from "./Alert";
 
+const getLocalStorage = () => {
+  let list = localStorage.getItem("listsItem");
+
+  if (list) {
+    return JSON.parse(localStorage.getItem("listsItem"));
+  } else {
+    return [];
+  }
+};
+
 export const App = () => {
   const [name, setName] = useState("");
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(getLocalStorage());
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
   const [alert, setAlert] = useState({
@@ -34,6 +44,7 @@ export const App = () => {
       setName("");
       setEditId(null);
       setIsEditing(false);
+      showAlert(true, "your item has been edited!", "success");
     } else {
       showAlert(true, "added to the list", "success");
       const newItem = {
@@ -45,11 +56,13 @@ export const App = () => {
         return [...list, newItem];
       });
 
-      localStorage.setItem("lists", JSON.stringify(newItem));
-
       setName("");
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("listsItem", JSON.stringify(list));
+  }, [list]);
 
   const showAlert = (show = false, msg = "", type = "") => {
     setAlert({ show, type, msg });
