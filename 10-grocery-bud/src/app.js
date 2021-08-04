@@ -8,9 +8,9 @@ export const App = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
   const [alert, setAlert] = useState({
-    show: true,
-    msg: "Hello",
-    type: "success",
+    show: false,
+    msg: "",
+    type: "",
   });
 
   const handleSubmit = (e) => {
@@ -18,9 +18,8 @@ export const App = () => {
 
     if (!name) {
       // display alert
-    }
-
-    if (name && isEditing) {
+      showAlert(true, "the value must not be empty", "danger");
+    } else if (name && isEditing) {
       // deal with edit
     } else {
       // show alert
@@ -34,6 +33,10 @@ export const App = () => {
       });
       setName("");
     }
+  };
+
+  const showAlert = (show = false, msg = "", type = "") => {
+    setAlert({ show, type, msg });
   };
 
   return (

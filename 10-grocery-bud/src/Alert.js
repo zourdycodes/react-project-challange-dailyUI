@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 const Alert = ({ type, msg }) => {
-  return <p className={`alert alert-${type}`}>{msg}</p>;
+  return <h3 className={`alert alert-${type}`}>{msg}</h3>;
 };
 
 export default Alert;
