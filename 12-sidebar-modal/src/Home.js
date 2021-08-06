@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { FaBars } from "react-icons/fa";
-import { ModalContext } from "./context";
+import { AppContext } from "./context";
 
 const Home = () => {
-  const { setShowSidebar, setIsModalOpen } = useContext(ModalContext);
+  const { setShowSidebar, setIsModalOpen } = useContext(AppContext);
 
   return (
     <main>

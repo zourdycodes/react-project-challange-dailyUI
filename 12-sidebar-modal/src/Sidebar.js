@@ -2,10 +2,10 @@ import React from "react";
 import logo from "./logo.svg";
 import { FaTimes } from "react-icons/fa";
 import { social, links } from "./data";
-import { ModalContext } from "./context";
+import { AppContext } from "./context";
 
 const Sidebar = () => {
-  const { showSidebar, setShowSidebar } = React.useContext(ModalContext);
+  const { showSidebar, setShowSidebar } = React.useContext(AppContext);
 
   return (
     <aside className={`sidebar ${showSidebar && "show-sidebar"}`}>

@@ -1,13 +1,13 @@
-import React, { useState, useContext, createContext } from "react";
+import React, { useState, createContext } from "react";
 
-export const ModalContext = createContext();
+export const AppContext = createContext();
 
 export const ContextProvider = (props) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <ModalContext.Provider
+    <AppContext.Provider
       value={{
         showSidebar,
         setShowSidebar,
@@ -16,6 +16,6 @@ export const ContextProvider = (props) => {
       }}
     >
       {props.children}
-    </ModalContext.Provider>
+    </AppContext.Provider>
   );
 };
