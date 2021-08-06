@@ -3,12 +3,14 @@ import { FaBars } from "react-icons/fa";
 import { ModalContext } from "./context";
 
 const Home = () => {
-  const { showSidebar, setShowSidebar, setIsModalOpen } =
-    useContext(ModalContext);
+  const { setShowSidebar, setIsModalOpen } = useContext(ModalContext);
 
   return (
     <main>
-      <button className="sidebar-toggle">
+      <button
+        className="sidebar-toggle"
+        onClick={() => setShowSidebar((showSidebar) => !showSidebar)}
+      >
         <FaBars />
       </button>
       <button

@@ -2,13 +2,16 @@ import React from "react";
 import logo from "./logo.svg";
 import { FaTimes } from "react-icons/fa";
 import { social, links } from "./data";
+import { ModalContext } from "./context";
 
 const Sidebar = () => {
+  const { showSidebar, setShowSidebar } = React.useContext(ModalContext);
+
   return (
-    <aside className={`sidebar show-sidebar`}>
+    <aside className={`sidebar ${showSidebar && "show-sidebar"}`}>
       <div className="sidebar-header">
-        <img src={logo} alt="coding supeeerrr" className="logo" />
-        <button className="close-btn">
+        <img src={logo} alt="coding super" className="logo" />
+        <button className="close-btn" onClick={() => setShowSidebar(false)}>
           <FaTimes />
         </button>
       </div>
