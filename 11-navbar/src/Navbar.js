@@ -4,16 +4,21 @@ import { links, social } from "./data";
 import logo from "./logo.svg";
 
 const Navbar = () => {
+  const [toggleShow, setToggleShow] = useState(false);
+
   return (
     <nav>
       <div className="nav-center">
         <div className="nav-header">
           <img src={logo} alt="logo-addict-coder" />
-          <button className="nav-toggle">
+          <button
+            className="nav-toggle"
+            onClick={() => setToggleShow((toggleShow) => !toggleShow)}
+          >
             <FaBars />
           </button>
         </div>
-        <div className="links-container show-container">
+        <div className={`links-container ${toggleShow && "show-container"}`}>
           <ul className="links">
             {links?.map((link) => (
               <li key={link.id}>
@@ -22,7 +27,13 @@ const Navbar = () => {
             ))}
           </ul>
         </div>
-        <ul className="social-icons"></ul>
+        <ul className="social-icons">
+          {social?.map((icon) => (
+            <li key={icon.id}>
+              <a href={icon.url}>{icon.icon}</a>
+            </li>
+          ))}
+        </ul>
       </div>
     </nav>
   );
