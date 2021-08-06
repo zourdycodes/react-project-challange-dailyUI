@@ -6,7 +6,9 @@ import Home from "./Home";
 export const App = () => {
   return (
     <>
-      <h2>modal-sidebar project setup</h2>
+      <Home />
+      <Modal />
+      <Sidebar />
     </>
   );
 };
