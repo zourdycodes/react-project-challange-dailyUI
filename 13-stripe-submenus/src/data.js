@@ -3,6 +3,7 @@ import React from "react";
 
 export const subLinks = [
   {
+    id: 0,
     page: "products",
     links: [
       { label: "payment", icon: <FaCreditCard />, url: "/products" },
@@ -11,6 +12,7 @@ export const subLinks = [
     ],
   },
   {
+    id: 1,
     page: "developers",
     links: [
       { label: "plugins", icon: <FaBook />, url: "/products" },
@@ -20,6 +22,7 @@ export const subLinks = [
     ],
   },
   {
+    id: 2,
     page: "company",
     links: [
       { label: "about", icon: <FaBriefcase />, url: "/products" },
