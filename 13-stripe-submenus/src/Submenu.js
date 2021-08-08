@@ -25,27 +25,29 @@ const Submenu = () => {
     if (links.length > 3) {
       setColumns("col-4");
     }
-  }, [location, links]);
+  }, [page, location, links]);
 
   return (
     <aside
       ref={container}
       className={`${isSubMenuOpen ? "submenu show" : "submenu"}`}
     >
-      <h4>{page}</h4>
-      <div className={`submenu-center ${columns}`}>
-        {links?.map((link, index) => {
-          const { label, icon, url } = link;
+      <section>
+        <h4>{page}</h4>
+        <div className={`submenu-center ${columns}`}>
+          {links?.map((link, index) => {
+            const { label, icon, url } = link;
 
-          return (
-            <>
-              <a href={url} key={index}>
-                {icon} {label}
-              </a>
-            </>
-          );
-        })}
-      </div>
+            return (
+              <>
+                <a href={url} key={index}>
+                  {icon} {label}
+                </a>
+              </>
+            );
+          })}
+        </div>
+      </section>
     </aside>
   );
 };

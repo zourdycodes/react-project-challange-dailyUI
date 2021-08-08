@@ -23,11 +23,11 @@ export const AppProvider = ({ children }) => {
     setPage(page);
 
     setLocation(coordinates);
-    setIsSubMenuOpen((isSidebarOpen) => !isSidebarOpen);
+    setIsSubMenuOpen(true);
   };
 
   const closeSubMenu = () => {
-    setIsSubMenuOpen(false);
+    setIsSubMenuOpen((isSubMenuOpen) => !isSubMenuOpen);
   };
 
   return (
