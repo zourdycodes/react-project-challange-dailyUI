@@ -15,11 +15,11 @@ export const AppProvider = ({ children }) => {
     setIsSidebarOpen(false);
   };
 
-  const openModal = () => {
+  const openSubMenu = () => {
     setIsSubMenuOpen((isSidebarOpen) => !isSidebarOpen);
   };
 
-  const closeModal = () => {
+  const closeSubMenu = () => {
     setIsSubMenuOpen(false);
   };
 
@@ -29,8 +29,8 @@ export const AppProvider = ({ children }) => {
         value={{
           openSidebar,
           closeSidebar,
-          openModal,
-          closeModal,
+          openSubMenu,
+          closeSubMenu,
           isSidebarOpen,
           isSubMenuOpen,
         }}
@@ -39,4 +39,8 @@ export const AppProvider = ({ children }) => {
       </AppContext.Provider>
     </>
   );
+};
+
+export const useGlobalContext = () => {
+  return useContext(AppContext);
 };
