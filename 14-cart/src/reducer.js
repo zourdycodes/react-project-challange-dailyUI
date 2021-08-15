@@ -34,6 +34,12 @@ export const reducer = (state, action) => {
   }
 
   switch (action.type) {
+    case "ERROR_FETCH_FAILED":
+      return {
+        ...state,
+        error: true,
+      };
+
     case "LOADING":
       return {
         ...state,

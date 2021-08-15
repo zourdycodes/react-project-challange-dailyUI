@@ -7,7 +7,17 @@ import CartContainer from "./CartContainer";
 // items
 
 export const App = () => {
-  const { loading } = useGlobalContext();
+  const { loading, error } = useGlobalContext();
+
+  if (error) {
+    return (
+      <div className="loading">
+        <h1>
+          Error fetching the data, check your connection or call the IT support
+        </h1>
+      </div>
+    );
+  }
 
   if (loading) {
     return (

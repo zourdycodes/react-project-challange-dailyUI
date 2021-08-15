@@ -59,6 +59,7 @@ const AppProvider = ({ children }) => {
         amount: state.amount,
         loading: state.loading,
         total: state.total,
+        error: state.error,
         clearCart,
         removeSingleItem,
         increaseItem,
