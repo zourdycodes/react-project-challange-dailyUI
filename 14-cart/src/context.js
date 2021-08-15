@@ -1,5 +1,4 @@
 import React, { useState, useContext, useReducer, useEffect } from "react";
-import cartItems from "./data";
 import { reducer } from "./reducer";
 
 const url = "https://course-api.com/react-useReducer-cart-project";
@@ -7,13 +6,31 @@ const AppContext = React.createContext();
 
 const initialState = {
   loading: false,
-  cart: cartItems,
+  cart: [],
   total: 0,
   amount: 0,
+  error: false,
 };
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    dispatch({ type: "LOADING" });
+    const fetchData = async () => {
+      const response = await fetch(url);
+
+      if (!response.ok && response.status >= 400 && response.status <= 500) {
+        dispatch({ type: "ERROR_FETCH_FAILED" });
+      }
+
+      const products = await response.json();
+
+      dispatch({ type: "FETCH_DATA_SUCCESS", payload: products });
+    };
+
+    fetchData();
+  }, []);
 
   const clearCart = () => {
     dispatch({ type: "CLEAR_CART" });
