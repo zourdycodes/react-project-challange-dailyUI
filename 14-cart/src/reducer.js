@@ -1,6 +1,38 @@
 import CartItem from "./CartItem";
 
+//TODO: We could do this but its not readable
+// type === "INCREASE_ITEM"
+// ? cartItem.amount + 1
+// : type === "DECREASE_ITEM"
+// ? cartItem.amount - 1
+// : cartItem.amount,
+
 export const reducer = (state, action) => {
+  function handleAmount(cart, type = "") {
+    const newCartItem = cart
+      .map((cartItem) => {
+        if (cartItem.id === action.payload) {
+          return {
+            ...cartItem,
+            amount: handleType(type, cartItem),
+          };
+        }
+        return cartItem;
+      })
+      .filter((item) => item.amount !== 0);
+
+    return newCartItem;
+  }
+
+  // this function is for checking the type of the dispatch
+  function handleType(type, cartItem) {
+    if (type === "INCREASE_ITEM") {
+      return cartItem.amount + 1;
+    } else if (type === "DECREASE_ITEM") {
+      return cartItem.amount - 1;
+    }
+  }
+
   switch (action.type) {
     case "CLEAR_CART":
       return {
@@ -15,32 +47,14 @@ export const reducer = (state, action) => {
       };
 
     case "INCREASE_ITEM":
-      let tempCart = state.cart.map((cartItem) => {
-        if (cartItem.id === action.payload) {
-          return {
-            ...cartItem,
-            amount: cartItem.amount + 1,
-          };
-        }
-        return cartItem;
-      });
+      let tempCart = handleAmount(state.cart, "INCREASE_ITEM");
       return {
         ...state,
         cart: tempCart,
       };
 
     case "DECREASE_ITEM":
-      let newCart = state.cart
-        .map((cartItem) => {
-          if (cartItem.id === action.payload) {
-            return {
-              ...cartItem,
-              amount: cartItem.amount - 1,
-            };
-          }
-          return cartItem;
-        })
-        .filter((item) => item.amount !== 0);
+      let newCart = handleAmount(state.cart, "DECREASE_ITEM");
 
       return {
         ...state,
