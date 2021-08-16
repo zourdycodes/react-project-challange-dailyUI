@@ -41,7 +41,7 @@ const AppProvider = ({ children }) => {
           setCocktails([]);
         }
 
-        setLoading((loading) => !loading);
+        setLoading(false);
       } catch (error) {
         console.error(error);
         setLoading(false);
@@ -49,7 +49,7 @@ const AppProvider = ({ children }) => {
     };
 
     fetchDrink();
-  }, []);
+  }, [searchTerm]);
 
   return (
     <AppContext.Provider
