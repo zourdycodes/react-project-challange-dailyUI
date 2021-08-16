@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import * as PATH from "./constant/routes";
 
 // import pages
 import Home from "./pages/Home";
@@ -12,8 +13,14 @@ import Navbar from "./components/Navbar";
 
 export const App = () => {
   return (
-    <div>
-      <h2>app component</h2>
-    </div>
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route exact path={PATH.HOME} component={Home} />
+        <Route path={PATH.ABOUT} component={About} />
+        <Route path={`/cocktail/:id`} children={<SingleCocktail />} />
+        <Route path={PATH.ERROR} component={Error} />
+      </Switch>
+    </Router>
   );
 };
