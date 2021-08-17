@@ -6,7 +6,14 @@ export const App = () => {
   return (
     <main>
       <section className="markdown">
-        <textarea className="input"></textarea>
+        <textarea
+          className="input"
+          value={markdown}
+          onChange={({ target }) => setMarkdown(target.value)}
+        ></textarea>
+        <article className="result">
+          <ReactMarkdown>{markdown}</ReactMarkdown>
+        </article>
       </section>
     </main>
   );
