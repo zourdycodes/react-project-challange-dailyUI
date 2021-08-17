@@ -13,12 +13,61 @@ const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
 
 export const App = () => {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
   const [title, setTitle] = useState("name");
   const [person, setPerson] = useState(null);
   const [value, setValue] = useState("random name");
 
-  const handleValue = (e) => {};
+  const fetchPerson = async () => {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(
+        "Sorry, we cannot fetch the data please check your connection!"
+      );
+    }
+
+    const data = await response.json();
+
+    const person = data.results[0];
+    const {
+      phone,
+      email,
+      picture: { large: image },
+      login: { password },
+      name: { first, last },
+      dob: { age },
+      location: {
+        street: { number, name },
+      },
+    } = person;
+
+    const newPerson = {
+      image,
+      phone,
+      email,
+      password,
+      age,
+      name: `${first} ${last}`,
+      address: `${number} ${name}`,
+    };
+
+    setLoading(false);
+    setPerson(newPerson);
+    setTitle("name");
+    setValue(newPerson.name);
+  };
+
+  useEffect(() => {
+    fetchPerson();
+  }, []);
+
+  const handleValue = (e) => {
+    if (e.target.classList.contains("icon")) {
+      const newValue = e.target.dataset.label;
+      setValue(person[newValue]);
+    }
+  };
 
   return (
     <main>
@@ -52,7 +101,7 @@ export const App = () => {
             </button>
             <button
               className="icon"
-              data-label="street"
+              data-label="address"
               onMouseOver={handleValue}
             >
               <FaMap />
@@ -72,7 +121,7 @@ export const App = () => {
               <FaLock />
             </button>
           </div>
-          <button className="btn" type="button">
+          <button className="btn" type="button" onClick={fetchPerson}>
             {loading ? "loading..." : "random user"}
           </button>
         </div>
