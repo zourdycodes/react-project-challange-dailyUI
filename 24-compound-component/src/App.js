@@ -1,3 +1,6 @@
+import "./App.scss";
+import movies from "./data";
+
 export const App = () => {
   return (
     <div className="App">
