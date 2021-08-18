@@ -2,6 +2,14 @@ import "./App.scss";
 import { Card } from "./components/Card";
 import movies from "./data";
 
+// let arr = [1, 2, 3, 4, 5, 6, 7, 8];
+
+// for (let i = 0; i < arr.length; i++) {
+//   for (let j = 0; j < arr.length; j++) {
+//     console.log(arr[i], arr[j]);
+//   }
+// }
+
 export const App = () => {
   return (
     <main>
