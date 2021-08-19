@@ -10,10 +10,35 @@ export const App = () => {
   useEffect(() => {
     if (loading) return;
     setFollowers(data[page]);
+    console.log(page);
   }, [loading, page]);
 
   const handlePage = (index) => {
     setPage(index);
+  };
+
+  const handleSubmit = (type) => {
+    if (type === "DECREASE") {
+      setPage((value) => {
+        let prevPage = value - 1;
+        if (prevPage < 0) {
+          prevPage = data.length - 1;
+        }
+
+        return prevPage;
+      });
+    }
+
+    if (type === "INCREASE") {
+      setPage((value) => {
+        let prevPage = value + 1;
+        if (prevPage > data.length - 1) {
+          prevPage = 0;
+        }
+
+        return prevPage;
+      });
+    }
   };
 
   return (
@@ -32,6 +57,12 @@ export const App = () => {
 
         {!loading && (
           <div className="btn-container">
+            <button
+              className="prev-btn"
+              onClick={() => handleSubmit("DECREASE")}
+            >
+              prev
+            </button>
             {data?.map((item, index) => {
               return (
                 <button
@@ -43,6 +74,12 @@ export const App = () => {
                 </button>
               );
             })}
+            <button
+              className="next-btn"
+              onClick={() => handleSubmit("INCREASE")}
+            >
+              next
+            </button>
           </div>
         )}
       </section>
