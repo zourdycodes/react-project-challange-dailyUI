@@ -11,6 +11,8 @@ export const App = () => {
     if (loading) return;
     setFollowers(data[page]);
     console.log(page);
+
+    // eslint-disable-next-line
   }, [loading, page]);
 
   const handlePage = (index) => {
