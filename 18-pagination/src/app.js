@@ -17,7 +17,7 @@ export const App = () => {
     setPage(index);
   };
 
-  const handleSubmit = (type) => {
+  const handlePrevAndNextButton = (type) => {
     if (type === "DECREASE") {
       setPage((value) => {
         let prevPage = value - 1;
@@ -59,7 +59,7 @@ export const App = () => {
           <div className="btn-container">
             <button
               className="prev-btn"
-              onClick={() => handleSubmit("DECREASE")}
+              onClick={() => handlePrevAndNextButton("DECREASE")}
             >
               prev
             </button>
@@ -76,7 +76,7 @@ export const App = () => {
             })}
             <button
               className="next-btn"
-              onClick={() => handleSubmit("INCREASE")}
+              onClick={() => handlePrevAndNextButton("INCREASE")}
             >
               next
             </button>
