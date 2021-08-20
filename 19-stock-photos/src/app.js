@@ -3,15 +3,13 @@ import { FaSearch } from "react-icons/fa";
 import Photo from "./Photo";
 const clientID = `?client_id=${process.env.REACT_APP_ACCESS_KEY}`;
 
-// secret key
-// pvlRoc2L-81o65yTSO1001alPYB0XoTHAy1uJgoGwmw
-
 const mainUrl = `https://api.unsplash.com/photos/`;
 const searchUrl = `https://api.unsplash.com/search/photos/`;
 
 export const App = () => {
   const [loading, setLoading] = useState(false);
   const [photos, setPhotos] = useState([]);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -33,13 +31,39 @@ export const App = () => {
     fetchPhotos();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="loading">
-        <h2>loading...</h2>
-      </div>
-    );
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
-  return <h2>stock photos starter</h2>;
+  return (
+    <main>
+      <section className="search">
+        <form className="search-form">
+          <input
+            type="text"
+            placeholder="search"
+            className="form-input"
+            value={query}
+            onChange={({ target }) => setQuery(target.value)}
+          />
+          <button type="submit" className="submit-btn" onClick={handleSubmit}>
+            <FaSearch />
+          </button>
+        </form>
+      </section>
+
+      <section className="photos">
+        <div className="photos-center">
+          {photos?.map((item, index) => {
+            return <Photo key={index} {...item} />;
+          })}
+        </div>
+        {loading && (
+          <div className="loading">
+            <h2>loading...</h2>
+          </div>
+        )}
+      </section>
+    </main>
+  );
 };
