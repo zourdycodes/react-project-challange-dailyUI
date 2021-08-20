@@ -9,31 +9,47 @@ const searchUrl = `https://api.unsplash.com/search/photos/`;
 export const App = () => {
   const [loading, setLoading] = useState(false);
   const [photos, setPhotos] = useState([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [query, setQuery] = useState("");
 
-  useEffect(() => {
-    const fetchPhotos = async () => {
-      let url;
-      const infinitePhotoURL = `&page=${page}`;
-      setLoading(true);
+  const fetchPhotos = async () => {
+    let url;
+    const infinitePhotoURL = `&page=${page}`;
+    const urlQuery = `&query=${query}`;
+    setLoading(true);
 
+    if (query) {
+      url = `${searchUrl}${clientID}${infinitePhotoURL}${urlQuery}`;
+    } else {
       url = `${mainUrl}${clientID}${infinitePhotoURL}`;
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
+    }
 
-        setLoading(false);
-        setPhotos((prevData) => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      setLoading(false);
+
+      // add old photo data => adding a new fetch of photo data --> destructuring it
+      setPhotos((prevData) => {
+        if (query && page === 1) {
+          return data.results;
+        } else if (query) {
+          return [...prevData, ...data.results];
+        } else {
           return [...prevData, ...data];
-        });
-      } catch (err) {
-        setLoading(false);
-        throw new Error(err);
-      }
-    };
+        }
+      });
+    } catch (err) {
+      setLoading(false);
+      throw new Error(err);
+    }
+  };
 
+  useEffect(() => {
     fetchPhotos();
+
+    // eslint-disable-next-line
   }, [page]);
 
   useEffect(() => {
@@ -55,6 +71,8 @@ export const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    setPage(1);
   };
 
   return (
