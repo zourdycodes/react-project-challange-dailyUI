@@ -31,6 +31,23 @@ export const App = () => {
     fetchPhotos();
   }, []);
 
+  useEffect(() => {
+    const event = window.addEventListener("scroll", () => {
+      if (
+        !loading &&
+        window.innerHeight + window.scrollY >= document.body.scrollHeight - 10
+      ) {
+        console.log("it worked");
+      }
+    });
+
+    return () => {
+      window.removeEventListener("scroll", event);
+    };
+
+    // eslint-disable-next-line
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -46,7 +63,14 @@ export const App = () => {
             value={query}
             onChange={({ target }) => setQuery(target.value)}
           />
-          <button type="submit" className="submit-btn" onClick={handleSubmit}>
+          <button
+            style={{
+              cursor: "pointer",
+            }}
+            type="submit"
+            className="submit-btn"
+            onClick={handleSubmit}
+          >
             <FaSearch />
           </button>
         </form>
