@@ -5,5 +5,10 @@ import Home from "./Home";
 import Movie from "./SingleMovie";
 
 export const App = () => {
-  return <h2>movie DB starter</h2>;
+  return (
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path={`/movie/:id`} component={Movie} />
+    </Switch>
+  );
 };
