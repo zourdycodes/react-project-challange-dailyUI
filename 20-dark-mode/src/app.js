@@ -2,8 +2,17 @@ import React, { useState, useEffect } from "react";
 import data from "./data";
 import Article from "./Article";
 
+const persistenceTheme = () => {
+  let theme = "light-theme";
+  if (localStorage.getItem("theme")) {
+    theme = localStorage.getItem("theme");
+  }
+
+  return theme;
+};
+
 export const App = () => {
-  const [theme, setTheme] = useState("light-theme");
+  const [theme, setTheme] = useState(persistenceTheme());
 
   const toggleTheme = () => {
     if (theme === "light-theme") {
@@ -15,6 +24,7 @@ export const App = () => {
 
   useEffect(() => {
     document.documentElement.className = theme;
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   return (
