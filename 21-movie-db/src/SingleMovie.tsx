@@ -2,13 +2,29 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { API_ENDPOINT } from "./context";
 
-const SingleMovie = () => {
-  const { id } = useParams();
-  const [movie, setMovie] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState({ show: false, msg: "" });
+interface ID {
+  id?: string | undefined | number;
+}
 
-  const fetchMovie = async (url) => {
+interface Movie {
+  Poster: any;
+  Title: any;
+  Plot: any;
+  Year: any;
+}
+
+interface Error {
+  show: boolean;
+  msg: string;
+}
+
+const SingleMovie: React.FC = () => {
+  const { id }: ID = useParams();
+  const [movie, setMovie] = useState<Movie | object | any>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error>({ show: false, msg: "" });
+
+  const fetchMovie = async (url: string) => {
     try {
       const response = await fetch(url);
 
@@ -30,7 +46,7 @@ const SingleMovie = () => {
       }
 
       setLoading(false);
-    } catch (err) {
+    } catch (err: any) {
       throw new Error(err);
     }
   };
@@ -54,15 +70,20 @@ const SingleMovie = () => {
     );
   }
 
-  const { Poster: poster, Title: title, Plot: plot, Year: year } = movie;
+  const {
+    Poster,
+    Title,
+    Plot,
+    Year,
+  }: { Poster: any; Title: any; Plot: any; Year: any } = movie;
 
   return (
     <section className="single-movie">
-      <img src={poster} alt={title} />
+      <img src={Poster} alt={Title} />
       <div className="single-movie-info">
-        <h2>{title}</h2>
-        <p>{plot}</p>
-        <h4>{year}</h4>
+        <h2>{Title}</h2>
+        <p>{Plot}</p>
+        <h4>{Year}</h4>
         <Link to="/" className="btn">
           back to homepage
         </Link>

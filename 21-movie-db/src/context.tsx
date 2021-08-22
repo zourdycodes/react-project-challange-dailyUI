@@ -1,24 +1,29 @@
 import React, { useState, useContext, useEffect } from "react";
 
+export interface Error {
+  show: boolean;
+  msg: string;
+}
+
 export const API_ENDPOINT = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_MOVIE_API_KEY}`;
 
-const AppContext = React.createContext();
+const AppContext = React.createContext({} as any);
 
-const AppProvider = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState({
+const AppProvider = ({ children }: any) => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error>({
     show: false,
     msg: "",
   });
-  const [movies, setMovies] = useState([]);
-  const [query, setQuery] = useState("jackass");
+  const [movies, setMovies] = useState<Array<object>>([]);
+  const [query, setQuery] = useState<string>("jackass");
 
   // fetch the API
-  const fetchMovies = async (url) => {
+  const fetchMovies = async (url: any) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(url);
+      const response: Response = await fetch(url);
 
       // error handliing
       if (!response.ok && response.status >= 400 && response.status <= 503) {
@@ -38,7 +43,7 @@ const AppProvider = ({ children }) => {
       }
 
       setIsLoading(false);
-    } catch (err) {
+    } catch (err: any) {
       setIsLoading((isLoading) => !isLoading);
       throw new Error(err);
     }
