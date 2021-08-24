@@ -22,6 +22,12 @@ export const reducer = (state, action) => {
         numberPages: action.payload.numberPages,
       };
 
+    case REMOVE_STORY:
+      return {
+        ...state,
+        hits: state.hits.filter((news) => news.objectID !== action.payload),
+      };
+
     default:
       return {
         ...state,
