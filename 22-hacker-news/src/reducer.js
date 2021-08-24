@@ -28,6 +28,12 @@ export const reducer = (state, action) => {
         hits: state.hits.filter((news) => news.objectID !== action.payload),
       };
 
+    case HANDLE_SEARCH:
+      return {
+        ...state,
+        query: action.payload,
+      };
+
     default:
       return {
         ...state,
