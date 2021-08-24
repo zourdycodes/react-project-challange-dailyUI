@@ -62,12 +62,17 @@ const AppProvider = ({ children }) => {
     dispatch({ type: HANDLE_SEARCH, payload: query });
   };
 
+  const handlePage = (value) => {
+    dispatch({ type: HANDLE_PAGE, payload: value });
+  };
+
   return (
     <AppContext.Provider
       value={{
         ...state,
         removeStory,
         handleSearch,
+        handlePage,
       }}
     >
       {children}

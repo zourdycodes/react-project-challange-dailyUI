@@ -6,7 +6,13 @@ const SearchForm = () => {
 
   return (
     <form className="search-form" onSubmit={(e) => e.preventDefault()}>
-      <h2>search tech news</h2>
+      <h2
+        style={{
+          color: "white",
+        }}
+      >
+        search tech news
+      </h2>
       <input
         type="text"
         className="form-input"
