@@ -11,12 +11,58 @@ import { reducer } from "./reducer";
 
 const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?";
 
-const initialState = {};
+const initialState = {
+  isLoading: true,
+  hits: [],
+  query: "react",
+  page: 0,
+  numberPages: 0,
+};
 
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  return <AppContext.Provider value="hello">{children}</AppContext.Provider>;
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const fetchNews = async (url) => {
+    dispatch({ type: SET_LOADING });
+
+    try {
+      const response = await fetch(url);
+
+      if (!response.ok && response.status >= 400 && response.status <= 504) {
+        throw new Error(
+          "Sorry, we are not be able to provide the data. please check your connection!"
+        );
+      }
+
+      const data = await response.json();
+
+      dispatch({
+        type: SET_STORIES,
+        payload: {
+          hits: data.hits,
+          numberPages: data.nbPages,
+        },
+      });
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchNews(`${API_ENDPOINT}query=${state.query}&page=${state.page}`);
+  }, [state.page, state.query]);
+
+  return (
+    <AppContext.Provider
+      value={{
+        ...state,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 };
 // make sure use
 export const useGlobalContext = () => {
