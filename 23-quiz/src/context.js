@@ -53,6 +53,22 @@ const AppProvider = ({ children }) => {
     fetchQuestions(tempURL);
   }, []);
 
+  // functionalities
+
+  const nextQuestion = () => {
+    setIndex((oldIndex) => {
+      let newIndex = oldIndex + 1;
+
+      if (newIndex > questions.length - 1) {
+        //todo: openModal()
+
+        return 0;
+      } else {
+        return newIndex;
+      }
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -63,6 +79,7 @@ const AppProvider = ({ children }) => {
         correct,
         error,
         isModalOpen,
+        nextQuestion,
       }}
     >
       {children}
