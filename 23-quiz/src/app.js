@@ -16,9 +16,35 @@ export const App = () => {
     return <Loading />;
   }
 
+  const { question, incorrect_answers, correct_answer } = questions[1];
+
+  const answers = [...incorrect_answers, correct_answer];
+
   return (
     <main>
-      <h1>Quiz APP</h1>
+      {/* <Modal /> */}
+
+      <section className="quiz">
+        <p className="correct-answers">
+          correct answer : {correct}/{index}
+        </p>
+        <article className="container">
+          <h2 dangerouslySetInnerHTML={{ __html: question }} />
+          <div className="btn-container">
+            {answers?.map((answer, index) => {
+              return (
+                <button
+                  key={index}
+                  className="answer-btn"
+                  dangerouslySetInnerHTML={{ __html: answer }}
+                />
+              );
+            })}
+          </div>
+        </article>
+
+        <button className="next-question">next question</button>
+      </section>
     </main>
   );
 };
