@@ -60,7 +60,7 @@ const AppProvider = ({ children }) => {
       let newIndex = oldIndex + 1;
 
       if (newIndex > questions.length - 1) {
-        //todo: openModal()
+        openModal();
 
         return 0;
       } else {
@@ -77,6 +77,16 @@ const AppProvider = ({ children }) => {
     nextQuestion();
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setWaiting(true);
+    setCorrect(0);
+    setIsModalOpen(false);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -89,6 +99,8 @@ const AppProvider = ({ children }) => {
         isModalOpen,
         nextQuestion,
         checkAnswer,
+        openModal,
+        closeModal,
       }}
     >
       {children}
