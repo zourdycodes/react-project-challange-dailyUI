@@ -26,6 +26,7 @@ const SetupForm = () => {
               📚
             </span>
           </h2>
+
           {/* amount */}
           <div className="form-control">
             <label htmlFor="amount">number of questions</label>
@@ -40,6 +41,7 @@ const SetupForm = () => {
               max={50}
             />
           </div>
+
           {/* category */}
           <div className="form-control">
             <label htmlFor="category">category</label>
@@ -57,6 +59,7 @@ const SetupForm = () => {
               ))}
             </select>
           </div>
+
           {/* difficulty */}
           <div className="form-control">
             <label htmlFor="difficulty">select difficulty</label>
