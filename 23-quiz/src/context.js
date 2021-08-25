@@ -69,6 +69,14 @@ const AppProvider = ({ children }) => {
     });
   };
 
+  const checkAnswer = (value) => {
+    if (value) {
+      setCorrect((correct) => correct + 1);
+    }
+
+    nextQuestion();
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -80,6 +88,7 @@ const AppProvider = ({ children }) => {
         error,
         isModalOpen,
         nextQuestion,
+        checkAnswer,
       }}
     >
       {children}
