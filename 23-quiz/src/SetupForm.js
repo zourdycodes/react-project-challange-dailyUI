@@ -9,9 +9,9 @@ const SetupForm = () => {
   const quizCategory = [
     "sports",
     "history",
-    "Science: Computers",
+    "computers",
     "politics",
-    "Science: Mathematics",
+    "mathematics",
   ];
 
   const difficulty = ["easy", "medium", "hard"];
